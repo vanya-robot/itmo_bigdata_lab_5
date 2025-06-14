@@ -1,0 +1,3 @@
+data/raw/
+.venv
+openfoodfacts-mongodbdump.gz
