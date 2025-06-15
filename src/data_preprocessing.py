@@ -22,7 +22,6 @@ class DataPreprocessor:
 
     def preprocess(self, df):
         """Предобработка данных"""
-        # Выбираем только нужные колонки
         df = df.select(self.config.selected_columns)
         
         # Заменяем некорректные значения на NULL
@@ -38,7 +37,7 @@ class DataPreprocessor:
             strategy="mean"
         ) for col in self.config.selected_columns]
         
-        # Создаем pipeline для импутации и масштабирования
+        # pipeline для импутации и масштабирования
         assembler = VectorAssembler(
             inputCols=self.config.selected_columns,
             outputCol="features"
@@ -68,3 +67,8 @@ class DataPreprocessor:
         self.save_data(processed_df, self.config.processed_data_path)
         self.spark.stop()
         return processed_df
+
+if __name__ == "__main__":
+    config = Config()
+    preprocessor = DataPreprocessor(config)
+    preprocessor.run()

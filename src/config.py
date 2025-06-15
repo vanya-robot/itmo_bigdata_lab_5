@@ -2,16 +2,13 @@ from dataclasses import dataclass
 
 @dataclass
 class Config:
-    # Пути к данным
-    raw_data_path: str = "../data/raw/en.openfoodfacts.org.products.csv"
-    processed_data_path: str = "../data/processed/processed_data.parquet"
-    
-    # Параметры модели
-    k: int = 5  # Количество кластеров
-    max_iter: int = 20  # Максимальное количество итераций
-    seed: int = 42  # Random seed
-    
-    # Колонки для анализа
+    raw_data_path: str = "/home/alexe/itmo/bigdata/itmo_bigdata_lab_5/data/raw/en.openfoodfacts.org.products.csv.gz"
+    processed_data_path: str = "/home/alexe/itmo/bigdata/itmo_bigdata_lab_5/data/processed/processed_data.parquet"
+
+    k: int = 5
+    max_iter: int = 20
+    seed: int = 123456
+
     numeric_columns: list = None
     selected_columns: list = None
     
