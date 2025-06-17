@@ -13,14 +13,12 @@ class Config:
     selected_columns: list = None
     
     def __post_init__(self):
-        # Выберем некоторые числовые колонки для анализа
         self.numeric_columns = [
             'energy_100g', 'fat_100g', 'carbohydrates_100g',
             'sugars_100g', 'proteins_100g', 'salt_100g',
             'sodium_100g', 'fiber_100g'
         ]
         
-        # Колонки, которые мы будем использовать для кластеризации
         self.selected_columns = [
             'energy_100g', 'fat_100g', 'carbohydrates_100g',
             'proteins_100g', 'sugars_100g'

@@ -23,21 +23,18 @@ class DataPreprocessor:
     def preprocess(self, df):
         """Предобработка данных"""
         df = df.select(self.config.selected_columns)
-        
-        # Заменяем некорректные значения на NULL
+
         for column in self.config.selected_columns:
             df = df.withColumn(
                 column,
                 when(col(column) < 0, None).otherwise(col(column)))
-        
-        # Импутация пропущенных значений
+
         imputers = [Imputer(
             inputCol=col, 
             outputCol=col, 
             strategy="mean"
         ) for col in self.config.selected_columns]
-        
-        # pipeline для импутации и масштабирования
+
         assembler = VectorAssembler(
             inputCols=self.config.selected_columns,
             outputCol="features"

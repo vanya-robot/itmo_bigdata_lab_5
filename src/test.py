@@ -25,8 +25,7 @@ class KMeansTester:
     def show_predictions(self, predictions):
         """Отображение предсказаний"""
         predictions.select("prediction").show(20)
-        
-        # Статистика по кластерам
+
         predictions.groupBy("prediction").count().orderBy("prediction").show()
 
     def run(self):
