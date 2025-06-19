@@ -2,14 +2,13 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, when
 from pyspark.ml.feature import Imputer, StandardScaler, VectorAssembler
 from pyspark.ml import Pipeline
-from src.config import Config
+from src.config import Config, SparkConfig
 
 class DataPreprocessor:
     def __init__(self, config: Config):
         self.config = config
-        self.spark = SparkSession.builder \
-            .appName("DataPreprocessing") \
-            .getOrCreate()
+        self.spark_config = SparkConfig()
+        self.spark = self.spark_config.get_spark_session()
 
     def load_data(self):
         """Загрузка сырых данных"""
