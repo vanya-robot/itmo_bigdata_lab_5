@@ -1,14 +1,13 @@
 from pyspark.ml.clustering import KMeans
 from pyspark.ml.evaluation import ClusteringEvaluator
 from pyspark.sql import SparkSession
-from src.config import Config
+from src.config import Config, SparkConfig
 
 class KMeansTrainer:
     def __init__(self, config: Config):
         self.config = config
-        self.spark = SparkSession.builder \
-            .appName("KMeansTraining") \
-            .getOrCreate()
+        self.spark_config = SparkConfig()
+        self.spark = self.spark_config.get_spark_session()
 
     def load_data(self):
         """Загрузка обработанных данных"""

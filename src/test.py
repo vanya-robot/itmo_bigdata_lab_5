@@ -1,14 +1,13 @@
 from pyspark.ml.clustering import KMeansModel
 from pyspark.sql import SparkSession
-from src.config import Config
+from src.config import Config, SparkConfig
 from src.data_preprocessing import DataPreprocessor
 
 class KMeansTester:
     def __init__(self, config: Config):
         self.config = config
-        self.spark = SparkSession.builder \
-            .appName("KMeansTesting") \
-            .getOrCreate()
+        self.spark_config = SparkConfig()
+        self.spark = self.spark_config.get_spark_session()
 
     def load_model(self, path):
         """Загрузка модели"""
